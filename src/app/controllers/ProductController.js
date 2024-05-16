@@ -49,8 +49,14 @@ class ProductController {
 	edit(req, res, next) {
 		const productId = req.params.id;
 
-		api.get(`products/${productId}`).then((resApi) => {
-			res.render('product/edit', { product: resApi.data });
+		Promise.all([
+			api.get('products/categories'),
+			api.get(`products/${productId}`),
+		]).then(([resCategory, resProduct]) => {
+			res.render('product/edit', {
+				product: resProduct.data,
+				categories: resCategory.data,
+			});
 		});
 	}
 
@@ -66,6 +72,11 @@ class ProductController {
 					src: req.body.imgSrc,
 					name: req.body.name,
 					alt: req.body.name,
+				},
+			],
+			categories: [
+				{
+					id: req.body.category,
 				},
 			],
 		};
