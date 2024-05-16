@@ -1,0 +1,26 @@
+<div class="container">
+    <h3>Edit product</h3>
+    <form method="POST" action="/product/{{product.id}}?_method=PUT">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Enter product name"
+                value="{{product.name}}" required />
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input value="{{product.price}}" type="number" class="form-control" name="price" id="price"
+                placeholder="Enter product price" required />
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" name="description" id="description" rows="3"
+                placeholder="Enter product description" required>{{product.description}}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="description">Image source</label>
+            <input value="{{product.images.[0].src}}" type="text" class="form-control" name="imgSrc" id="imgSrc"
+                placeholder="Enter product image source" />
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>

@@ -1,0 +1,34 @@
+<div class="container">
+    <h3>Create product</h3>
+    <form method="POST" action="/product/store">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Enter product name" required />
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" name="price" id="price" placeholder="Enter product price"
+                required />
+        </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select class="form-select" id="category" name="category" aria-label="Default select example" required>
+                <option value="">-- Select category --</option>
+                {{#each categories}}
+                <option value="{{this.id}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" name="description" id="description" rows="3"
+                placeholder="Enter product description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="description">Image source</label>
+            <input type="text" class="form-control" name="imgSrc" id="imgSrc" placeholder="Enter product image source"
+                required />
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
