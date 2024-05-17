@@ -1,0 +1,63 @@
+<div class="container">
+    <h3>Create coupon</h3>
+    <form method="POST" action="/coupon/store">
+        <div class="form-group">
+            <label for="code">Name</label>
+            <input type="text" class="form-control" name="code" id="code" placeholder="Enter coupon name" required />
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" name="amount" id="amount" placeholder="Enter coupon amount"
+                required />
+        </div>
+        <div class="form-group">
+            <label for="discount_type">Type</label>
+            <select class="form-select" id="discount_type" name="discount_type" aria-label="Default select example"
+                required>
+                <option value="">-- Select discount type --</option>
+                <option value="percent">Giảm giá theo phần trăm</option>
+                <option value="fixed_cart">Giảm giá giỏ hàng cố định</option>
+                <option value="fixed_product">Giảm giá sản phẩm cố định</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" name="description" id="description" rows="3"
+                placeholder="Enter coupon description"></textarea>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" name="free_shipping" id="free_shipping">
+            <label class="form-check-label" for="free_shipping">
+                Freeship
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="date_expires">Expire date</label>
+            <input type="date" class="form-control" name="date_expires" id="date_expires" required />
+        </div>
+        <p>------------ Expression (Optional) ------------</p>
+        <div class="form-group">
+            <label for="minimum_amount">Minimum amount</label>
+            <input type="number" class="form-control" name="minimum_amount" id="minimum_amount"
+                placeholder="Enter coupon minimum amount" />
+        </div>
+        <div class="form-group">
+            <label for="maximum_amount">Maximum amount</label>
+            <input type="number" class="form-control" name="maximum_amount" id="maximum_amount"
+                placeholder="Enter coupon maximum amount" />
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $('#free_shipping').on('change', function () {
+            if ($(this).is(':checked')) {
+                $(this).attr('value', 'true');
+            } else {
+                $(this).attr('value', 'false');
+            }
+        });
+    });
+</script>
