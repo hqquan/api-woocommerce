@@ -1,0 +1,91 @@
+<form name="container-form" class='mt-4' method="POST" action="">
+    <div>
+        <h3>My customers</h3>
+    </div>
+
+    <table class='table mt-4'>
+        <thead>
+            <tr>
+                <th scope='col'>
+                    ID
+                </th>
+                <th scope='col'>
+                    Name
+                </th>
+                <th scope='col'>
+                    Email
+                </th>
+                <th scope='col'>
+                    Create At
+                </th>
+                <th scope='col'></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each customers}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.username}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.date_created}}</td>
+                <td>
+                    <a href='/customer/{{this.id}}/edit' class='btn btn-link'>Edit</a>
+                    <a href='' class='btn btn-link' data-toggle='modal' data-target='#deleteModal'
+                        data-id='{{this.id}}'>Delete</a>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="4" class="text-center">
+                    Không có khách hàng.
+                    <a href="/customer/create">Thêm khách hàng ngay</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</form>
+
+{{! Delete modal }}
+<div class='modal fade' id='deleteModal' tabindex='-1' role='dialog' aria-labelledby='deleteModalLabel'
+    aria-hidden='true'>
+    <div class='modal-dialog' role='document'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>
+            <div class='modal-body'>
+                Are you sure?
+            </div>
+            <div class='modal-footer'>
+                <button type='button' class='btn btn-danger' id='btn-delete-customer'>Delete</button>
+                <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{! Delete hidden form }}
+<form method='POST' name='delete-customer-form'></form>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var customerId;
+        var deleteCustomerForm = document.forms['delete-customer-form'];
+        var btnDeleteCustomer = document.getElementById('btn-delete-customer');
+
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            customerId = button.data('id');
+        });
+
+        btnDeleteCustomer.onclick = function () {
+            deleteCustomerForm.action = '/customer/' + customerId + '?_method=DELETE';
+            deleteCustomerForm.submit();
+        }
+    })
+
+</script>
