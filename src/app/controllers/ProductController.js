@@ -1,10 +1,15 @@
 const api = require('../../config/api');
 
 class ProductController {
-	// [GET] /product
+	// [GET] /product/:page&:per_page
 	show(req, res, next) {
-		api.get('products').then((resApi) => {
-			res.render('product/show', { products: resApi.data });
+		// let per_page = 10;
+		// let page = req.params.page || 1;
+		// ?page=${page}&per_page=${per_page}
+		api.get(`products`).then((resApi) => {
+			res.render('product/show', {
+				products: resApi.data,
+			});
 		});
 	}
 
